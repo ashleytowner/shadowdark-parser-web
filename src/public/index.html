@@ -3,17 +3,52 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title></title>
+    <title>Shadowdark Parser</title>
     <link href="css/style.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <form method="POST" action="/api/parse" enctype="multipart/form-data">
+    <h1>Shadowdark Parser</h1>
+    <div class="col">
+      <p>
+        Copy & paste shadowdark monsters, spells, magic items, etc from PDFs &
+        convert them into whatever format you like!
+      </p>
+      <p>
+        The default format returned is JSON, but you can upload a
+        <a
+          href="https://github.com/ashleytowner/shadowdark-parser/wiki/Example-Handlebars-Templates"
+          >handlebars template</a
+        >
+        to have it output in whatever format you'd like!
+      </p>
+    </div>
+    <form
+      class="col"
+      method="POST"
+      action="/api/parse"
+      enctype="multipart/form-data"
+    >
+      <label for="data">Text from a PDF</label>
       <textarea id="data" name="data"></textarea>
-      <select id="amount" name="amount">
-        <option value="single">Single</option>
-        <option value="bulk">Bulk</option>
-      </select>
-      <input type="file" name="template" />
+      <div class="row">
+        <div>
+          <label for="amount">Single / Bulk</label>
+          <select id="amount" name="amount">
+            <option value="single">Single</option>
+            <option value="bulk">Bulk</option>
+          </select>
+        </div>
+        <div>
+          <label for="template">Handlebars Template File (optional)</label>
+          <input type="file" id="template" name="template" accept=".hbs" />
+        </div>
+      </div>
       <button type="submit">Parse</button>
     </form>
   </body>

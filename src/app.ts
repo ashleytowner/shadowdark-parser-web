@@ -30,11 +30,9 @@ app.post("/api/parse", upload.single("template"), (req, res) => {
   }
 
   if (req.file) {
-    const template = getTemplateFromFile(
-      path.join(req.file.path, req.file.filename),
-    );
+    const template = getTemplateFromFile(req.file.path);
     res.send(template(result));
-    unlink(path.join(req.file.path, req.file.filename), (err) => {
+    unlink(req.file.path, (err) => {
       if (err) {
         console.error(err);
       }
