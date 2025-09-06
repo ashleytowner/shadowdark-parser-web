@@ -1,7 +1,14 @@
 import express from "express";
 import path from "path";
-import { allCapsStrategy, bulkParse, parse } from "shadowdark-parser";
+import {
+  allCapsStrategy,
+  bulkParse,
+  getTemplateFromFile,
+  parse,
+} from "shadowdark-parser";
+import multer from "multer";
 import bodyParser from "body-parser";
+import { readFileSync, unlink } from "fs";
 
 const app = express();
 
@@ -9,18 +16,33 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/api/parse", (req, res) => {
-	const { data, amount } = req.body;
-	let result: ReturnType<typeof parse> | ReturnType<typeof bulkParse>;
-	console.log(amount);
-	switch(amount) {
-		case 'single':
-			result = parse(data);
-			break;
-		default:
-			result = bulkParse(data, allCapsStrategy);
-	}
-	res.send(result);
+const upload = multer({ dest: path.join(__dirname, "uploaded-templates/") });
+
+app.post("/api/parse", upload.single("template"), (req, res) => {
+  const { data, amount } = req.body;
+  let result: ReturnType<typeof parse> | ReturnType<typeof bulkParse>;
+  switch (amount) {
+    case "single":
+      result = parse(data);
+      break;
+    default:
+      result = bulkParse(data, allCapsStrategy);
+  }
+
+  if (req.file) {
+    const template = getTemplateFromFile(
+      path.join(req.file.path, req.file.filename),
+    );
+    res.send(template(result));
+    unlink(path.join(req.file.path, req.file.filename), (err) => {
+      if (err) {
+        console.error(err);
+      }
+      console.log("Removed file");
+    });
+  } else {
+    res.send(result);
+  }
 });
 
 app.listen(3000, () => {

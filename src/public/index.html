@@ -7,12 +7,13 @@
     <link href="css/style.css" rel="stylesheet" />
   </head>
   <body>
-    <form method="POST" action="/api/parse">
+    <form method="POST" action="/api/parse" enctype="multipart/form-data">
       <textarea id="data" name="data"></textarea>
       <select id="amount" name="amount">
         <option value="single">Single</option>
         <option value="bulk">Bulk</option>
       </select>
+      <input type="file" name="template" />
       <button type="submit">Parse</button>
     </form>
   </body>
