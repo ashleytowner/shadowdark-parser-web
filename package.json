@@ -5,7 +5,8 @@
   "main": "dist/app.js",
   "scripts": {
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "start": "nodemon src/app.ts"
   },
   "author": "Ashley Towner",
   "license": "MIT",
