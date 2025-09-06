@@ -1,0 +1,19 @@
+{
+  "name": "@shadowdark-parser/web",
+  "version": "0.1.0",
+  "description": "A web version of the shadowdark-parser",
+  "main": "dist/app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Ashley Towner",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.3.1",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
