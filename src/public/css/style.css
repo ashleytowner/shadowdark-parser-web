@@ -1,0 +1,41 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 100%;
+}
+
+form {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  gap: 1rem;
+}
+
+textarea {
+  height: 500px;
+	font-size: 1rem;
+  resize: vertical;
+}
+
+input,
+button,
+select {
+  font-size: 24px;
+  padding: 0.5rem;
+  border: none;
+}
+
+button {
+  background: black;
+  color: white;
+}
+
+button:hover,
+button:focus {
+  background: #444;
+}

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <link href="css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <form method="POST" action="/api/parse">
+      <textarea id="data" name="data"></textarea>
+      <select id="amount" name="amount">
+        <option value="single">Single</option>
+        <option value="bulk">Bulk</option>
+      </select>
+      <button type="submit">Parse</button>
+    </form>
+  </body>
+</html>

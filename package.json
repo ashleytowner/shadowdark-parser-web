@@ -4,6 +4,7 @@
   "description": "A web version of the shadowdark-parser",
   "main": "dist/app.js",
   "scripts": {
+    "build": "tsc",
     "test": "jest"
   },
   "author": "Ashley Towner",
@@ -11,9 +12,13 @@
   "devDependencies": {
     "@types/express": "^5.0.3",
     "@types/node": "^24.3.1",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
     "typescript": "^5.9.2"
   },
   "dependencies": {
-    "express": "^5.1.0"
+    "body-parser": "^2.2.0",
+    "express": "^5.1.0",
+    "shadowdark-parser": "^3.1.0"
   }
 }
