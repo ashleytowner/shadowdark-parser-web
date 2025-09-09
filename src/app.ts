@@ -1,22 +1,16 @@
 import express from "express";
 import path from "path";
-import {
-  allCapsStrategy,
-  bulkParse,
-  getTemplateFromFile,
-  parse,
-} from "shadowdark-parser";
+import { allCapsStrategy, bulkParse, parse } from "shadowdark-parser";
 import multer from "multer";
 import bodyParser from "body-parser";
-import { readFileSync, unlink } from "fs";
-
+import Handlebars from "handlebars";
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, "public")));
 
-const upload = multer({ dest: path.join(__dirname, "uploaded-templates/") });
+const upload = multer({ storage: multer.memoryStorage() });
 
 app.post("/api/parse", upload.single("template"), (req, res) => {
   const { data, amount } = req.body;
@@ -31,14 +25,8 @@ app.post("/api/parse", upload.single("template"), (req, res) => {
     }
 
     if (req.file) {
-      const template = getTemplateFromFile(req.file.path);
+      const template = Handlebars.compile(req.file.buffer.toString());
       res.type("text/plain").send(template(result));
-      unlink(req.file.path, (err) => {
-        if (err) {
-          console.error(err);
-        }
-        console.log("Removed file");
-      });
     } else {
       res.send(result);
     }
