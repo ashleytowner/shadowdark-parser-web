@@ -41,6 +41,10 @@ app.post("/api/parse", upload.single("template"), (req, res) => {
   }
 });
 
+app.get('/checkhealth', (_, res) => {
+	res.send(Date.now());
+});
+
 app.listen(3000, () => {
   console.log("listening on http://localhost:3000");
 });
